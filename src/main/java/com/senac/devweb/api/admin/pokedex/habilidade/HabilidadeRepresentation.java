@@ -1,6 +1,7 @@
 package com.senac.devweb.api.admin.pokedex.habilidade;
 
 import com.senac.devweb.api.admin.pokedex.pokemon.Pokemon;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +30,22 @@ public interface HabilidadeRepresentation {
         private String descricao;
     }
 
+    @Data
+    @Getter
+    @Setter
+    @Builder
     class Detail {
+        private Integer id;
+        private String nome;
+        private String descricao;
 
+        public static Detail from(Habilidade habilidade) {
+            return Detail.builder()
+                    .id(habilidade.getId())
+                    .nome(habilidade.getNome())
+                    .descricao(habilidade.getDescricao())
+                    .build();
+        }
     }
 
 }
