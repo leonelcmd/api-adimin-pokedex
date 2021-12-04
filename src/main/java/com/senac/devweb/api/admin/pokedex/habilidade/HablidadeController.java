@@ -16,10 +16,8 @@ public class HablidadeController {
     private HabilidadeService habilidadeService;
 //
     @PostMapping("/")
-    public ResponseEntity<HabilidadeRepresentation.Detail> salvarHabilidade( @Valid @RequestBody HabilidadeRepresentation.CreateOrUpdate createOrUpdate) {
+    public ResponseEntity<HabilidadeRepresentation.Detail> salvar( @Valid @RequestBody HabilidadeRepresentation.CreateOrUpdate createOrUpdate) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(HabilidadeRepresentation.Detail.from(this.habilidadeService.salvar(createOrUpdate)));
-
     }
-
 }

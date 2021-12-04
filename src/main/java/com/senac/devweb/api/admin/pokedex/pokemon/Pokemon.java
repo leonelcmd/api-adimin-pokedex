@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +26,21 @@ public class Pokemon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="i_pokemon")
+    @Column(name="id_pokemon")
     private Integer id;
 
     @Column(name="nome")
+    @NotNull(message = "Nome do Pokemon obrigatório")
+    @Size(min = 5, max = 50, message = "Nome deve ter entre 5 e 50 caracteres")
     private String nome;
 
-    @Column(name="porte")
-    private Porte porte;
+    @Column(name="fase")
+    @NotNull(message = "escolha a fase do pokemon cadastrado")
+    private Fase fase;
 
     @Column(name="tipo")
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Escolha o tipo do pokemon")
     private TipoPokemon tipoPokemon;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pokemon", orphanRemoval = true)
@@ -42,10 +49,9 @@ public class Pokemon {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "pokemon", orphanRemoval = true)
     private List<Habilidade> habilidades = new ArrayList<>();
 
-
-    enum Porte {
-        PEQUENO,
-        MEDIO,
-        GRANDE
+    enum Fase {
+        PRIMARIA,
+        SECUNDARIA,
+        FINAL
     }
 }
