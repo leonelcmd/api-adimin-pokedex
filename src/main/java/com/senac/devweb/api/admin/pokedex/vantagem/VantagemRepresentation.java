@@ -35,7 +35,6 @@ public interface VantagemRepresentation {
     @Builder
     class Detail {
         private Integer id;
-        private Pokemon pokemon;
         private Boolean pro;
         private Boolean imune;
         private TipoPokemon tipoPokemon;
@@ -44,7 +43,6 @@ public interface VantagemRepresentation {
             return Detail.builder()
                     .id(vantagem.getId())
                     .imune(vantagem.getImune())
-                    .pokemon(vantagem.getPokemon())
                     .tipoPokemon(vantagem.getTipoPokemon())
                     .pro(vantagem.getPro())
                     .build();
